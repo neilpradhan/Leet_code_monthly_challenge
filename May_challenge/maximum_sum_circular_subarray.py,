@@ -1,0 +1,33 @@
+
+
+class Solution:
+    
+    def maxSubarraySumCircular(self, A: List[int]) -> int:
+        if len(A) == 0:
+            return 0
+        k = self.kadane(A)
+        total_sum = 0
+        for num in A:
+            total_sum +=num
+        A = [-A[i] for i in range(0,len(A))]
+        total_sum = total_sum + self.kadane(A)
+        
+        if total_sum>k and total_sum!=0:
+            return total_sum
+        else:
+            return k
+    
+    def kadane(self, nums):
+        print(len(nums))
+
+        sub_sum = nums[0]
+        print(sub_sum)
+        res = nums[0]
+        for n in nums[1:]:
+            sub_sum = max(sub_sum+n, n)
+            res = max(res, sub_sum)
+        return res  
+    
+
+    
+    
